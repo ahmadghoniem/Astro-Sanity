@@ -10,7 +10,6 @@ export async function getStaticPaths() {
   return posts.map((props,id) => {
     const prevArticle=posts[id-1];
     const nextArticle=posts[id+1];
-    console.log(prevArticle);
     const { slug, title, body,images } = props;
     return {
       params: { slug: slug.current },

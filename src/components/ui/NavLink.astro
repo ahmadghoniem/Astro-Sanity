@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 const currentPath = new URL(Astro.request.url).pathname;
 const {href,class:classList} = Astro.props;
 const isActive = (currentPath === href);
-console.log(href);
+console.log(currentPath);
 
 ---
 <a class={ cn("hover:opacity-90 underline-offset-4",isActive&&"underline font-semibold",classList)} href={href}><slot /></a>
