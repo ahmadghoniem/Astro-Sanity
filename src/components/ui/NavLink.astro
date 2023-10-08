@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 
 const currentPath = new URL(Astro.request.url).pathname;
-const cleanedPath =  currentPath.replace(/\/+$/, '/');
+const cleanedPath =  (currentPath.endsWith("/") && currentPath.length>1) && currentPath.slice(0,-1) || currentPath
 const {href,class:classList} = Astro.props;
 const isActive = (cleanedPath === href);
 
