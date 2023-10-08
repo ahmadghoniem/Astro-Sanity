@@ -1,0 +1,47 @@
+---
+import { sanityClient  } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import { imageUrlFor } from "@/lib/utils";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const query = `*[_type == "post"]`;
+  const posts = await sanityClient.fetch(query);
+  return posts.map((props,id) => {
+    const prevArticle=posts[id-1];
+    const nextArticle=posts[id+1];
+    console.log(prevArticle);
+    const { slug, title, body,images } = props;
+    return {
+      params: { slug: slug.current },
+      props: { title,body,images,prevArticle,nextArticle },
+    };
+  });
+}
+const { title,body,images,prevArticle,nextArticle } = Astro.props;
+---
+<Layout title={title}>
+<section class="p-12">
+<article>
+
+<h1 class="text-green-600 text-3xl bg-green-100">{title}</h1>
+<PortableText value={body}/>
+<div class="mx-auto grid grid-cols-6 items-center gap-y-8  md:gap-x-[calc((768px-(18rem*2))/3)] lg:gap-x-[calc((1024px-(18rem*3))/4)]">
+  {
+    images.map((src)=> (
+      <img class="col-span-6 md:col-span-3 lg:col-span-2" src={imageUrlFor(src).format("webp").url()} alt={title}
+ />
+    ))
+  }
+</div>
+</article>
+
+<div class="flex flex-row w-full justify-between">
+  <!-- next -->
+ { prevArticle &&<a class="mr-auto" href={`/work/${prevArticle.slug.current}`}>{prevArticle.title}</a>}
+  <!-- prev -->
+  { nextArticle &&<a class="ml-auto" href={`/work/${nextArticle.slug.current}`}>{nextArticle.title}</a>}
+</div>
+</section>
+
+</Layout>

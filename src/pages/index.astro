@@ -1,0 +1,14 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Card from '@/components/Card.astro';
+import { sanityClient  } from "sanity:client";
+
+const query = `*[_type == "post"]`;
+const posts = await sanityClient.fetch(query);
+---
+
+<Layout title="Welcome to Astro.">
+  <section class="p-12">
+    {posts.length ? posts.map((post) => <Card post={post} />) : <h1 class="text-3xl text-green-800">No content to preview, come back later!</h1>}
+  </section>
+</Layout>

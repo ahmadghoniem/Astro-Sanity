@@ -1,0 +1,51 @@
+---
+import instagramIcon from "/images/instagram.svg?raw"; 
+import linkIcon from "/images/link.svg?raw"; 
+import { imageUrlFor } from "@/lib/utils";
+
+import { sanityClient  } from "sanity:client";
+import NavLink from "@/components/ui/NavLink.astro";
+import groq from "groq";
+const query = groq `*[_type == "author"][0] {
+        artstationLink,
+        instagramLink,
+        logo    }
+        `;
+const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
+   );
+
+---
+<header class="p-12 flex flex-row justify-between items-center">
+    <a href="/">
+      <img width="120" src={imageUrlFor(logo).width(480).url()} />
+    </a>
+    <nav class="flex flex-row gap-8">
+      <ul class="flex flex-row gap-4">
+        <li>
+          <NavLink class="active:underline" href="/">
+            work
+          </NavLink>
+        </li>
+        <li>
+          <NavLink href="/contact">contact</NavLink>
+        </li>
+      </ul>
+      <ul class="flex flex-row gap-4">
+        <li>
+          <a href={instagramLink} target="_blank">
+            <span class="w-5 h-5">
+              <Fragment set:html={instagramIcon} />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={artstationLink} target="_blank">
+            <span class="w-5 h-5">
+                <Fragment set:html={linkIcon} />
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>;
+  

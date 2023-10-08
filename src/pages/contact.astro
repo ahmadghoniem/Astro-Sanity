@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import groq from "groq";
+import { sanityClient  } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+
+const query = groq `*[_type == "author"][0] {
+    bio,
+    email,
+    linkedinLink,
+        artstationLink,
+        instagramLink,
+            }
+        `;
+        
+const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient.fetch(query);
+---
+
+<Layout title="Welcome to Astro.">
+    <section class="p-12">
+        <h2>contact info</h2>
+<PortableText value={bio}/>
+        
+    </section>
+  </Layout>
