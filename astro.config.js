@@ -15,7 +15,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sanity({
-      //TODO:env variables
+      //TODO:env variablesz
       projectId: SANITY_PROJECT_ID,
       dataset: SANITY_PROJECT_DATASET,
       // Set useCdn to false if you're building statically.
