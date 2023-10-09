@@ -11,11 +11,11 @@ export default defineConfig({
     sanity({
       //TODO:env variables
       projectId:
-        import.meta.env.PUBLIC_VERCEL_ENV === "production"
+        JSON.stringify(import.meta.env.PUBLIC_VERCEL_ENV) === "production"
           ? JSON.stringify(import.meta.env.PUBLIC_SANITY_PROJECT_ID)
           : import.meta.env.VITE_SANITY_PROJECT_ID,
       dataset:
-        import.meta.env.PUBLIC_VERCEL_ENV === "production"
+        JSON.stringify(import.meta.env.PUBLIC_VERCEL_ENV) === "production"
           ? JSON.stringify(import.meta.env.PUBLIC_SANITY_PROJECT_DATASET)
           : import.meta.env.VITE_SANITY_PROJECT_DATASET,
       // Set useCdn to false if you're building statically.
