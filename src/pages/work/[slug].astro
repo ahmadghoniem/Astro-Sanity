@@ -12,21 +12,21 @@ export async function getStaticPaths() {
   return posts.map((props,id) => {
     const prevArticle=posts[id-1];
     const nextArticle=posts[id+1];
-    const { slug, title, body,images } = props;
+    const { slug, title, excerpt,images } = props;
     return {
       params: { slug: slug.current },
-      props: { title,body,images,prevArticle,nextArticle },
+      props: { title,excerpt,images,prevArticle,nextArticle },
     };
   });
 }
-const { title,body,images,prevArticle,nextArticle } = Astro.props;
+const { title,excerpt,images,prevArticle,nextArticle } = Astro.props;
 ---
 <Layout title={title}>
   <section class="p-12">
     <article>
       <figure class="grid grid-cols-6 grid-row-[min_content] gap-4">
         <figcaption style="--text-multiplier: 1.5;" class="text-center col-span-6 max-w-5xl mx-auto mb-32">
-          <PortableText value={body} />
+          <PortableText value={excerpt} />
         </figcaption>
         {images.map((img) => {
           return ( 
