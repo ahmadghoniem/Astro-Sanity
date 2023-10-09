@@ -3,7 +3,8 @@ import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
 console.log(JSON.stringify("1st->", import.meta.env.PUBLIC_VERCEL_ENV));
 console.log(JSON.stringify("2nd->", process.env.PUBLIC_VERCEL_ENV));
-console.log(JSON.stringify("3nd->", process.env.PUBLIC_SANITY_PROJECT_ID));
+console.log(JSON.stringify("3rd->", process.env.PUBLIC_SANITY_PROJECT_ID));
+console.log(JSON.stringify("4th->", process.env.SANITY_PROJECT_ID));
 
 export default defineConfig({
   integrations: [
