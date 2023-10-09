@@ -1,12 +1,9 @@
 ---
-import instagramIcon from "/images/instagram.svg?raw"; 
-import linkIcon from "/images/link.svg?raw"; 
 import { imageUrlFor } from "@/lib/utils";
-import Icon from "./ui/Icon.astro";
+import LucideIcon from "./ui/LucideIcon.astro";
 import { sanityClient  } from "sanity:client";
 import NavLink from "@/components/ui/NavLink.astro";
-const currentPath = new URL(Astro.request.url).pathname;
-
+import {Instagram,Link2} from "lucide"
 const query = `*[_type == "author"][0] {
         artstationLink,
         instagramLink,
@@ -14,15 +11,13 @@ const query = `*[_type == "author"][0] {
         `;
 const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
    );
-
 ---
 <header class="p-12 flex flex-row justify-between items-center">
-  {currentPath}
     <a href="/">
       <img width="120" src={imageUrlFor(logo).width(480).url()} />
     </a>
     <nav class="flex flex-row gap-8">
-      <ul class="flex flex-row gap-4">
+      <ul class="flex flex-row gap-6">
         <li>
           <NavLink class="active:underline" href="/">
             work
@@ -32,14 +27,13 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
           <NavLink href="/contact">contact</NavLink>
         </li>
       </ul>
-      <div class="flex flex-row gap-4">
+      <div class="flex flex-row gap-6">
           <a href={instagramLink} target="_blank">
-              <Icon icon={instagramIcon} />
+              <LucideIcon icon={Instagram} />
           </a>
           <a href={artstationLink} target="_blank">
-                <Icon icon={linkIcon} />
+                <LucideIcon icon={Link2} />
           </a>
       </di>
     </nav>
-  </header>;
-  
+  </header>

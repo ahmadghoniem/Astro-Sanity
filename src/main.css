@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  h1 {
+    @apply text-[calc(clamp(1.5rem,2vw,2rem)*var(--text-multiplier,1))] font-bold;
+  }
+  h2 {
+    @apply text-[calc(clamp(1.17rem,2vw,1.5rem)*var(--text-multiplier,1))] font-bold;
+  }
+  h3 {
+    @apply text-[calc(clamp(1rem,2vw,1.17rem)*var(--text-multiplier,1))] font-semibold;
+  }
+  h4 {
+    @apply text-[calc(clamp(0.83rem,2vw,1rem)*var(--text-multiplier,1))] font-semibold;
+  }
+  h5 {
+    @apply text-[calc(clamp(0.67rem,2vw,0.83rem)*var(--text-multiplier,1))] font-semibold;
+  }
+  h6 {
+    @apply text-[0.67rem] font-medium;
+  }
   :root {
     --font-sans: Open Sans;
 
@@ -17,21 +35,6 @@
 
     --accent: 210 40% 96.1%;
     --accent-foreground: 229 47.4% 11.2%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 229 47.4% 11.2%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 229 47.4% 11.2%;
-
-    --terminal: 210 29% 97%;
-    --terminal-foreground: 229 9% 51%;
-    --terminal-thumb: 220 12% 90%;
-
-    --ring: 215 20.2% 65.1%;
   }
   :root.dark {
     color-scheme: dark;
@@ -48,21 +51,6 @@
 
     --accent: 216 34% 17%;
     --accent-foreground: 210 40% 98%;
-
-    --popover: 229 84% 5%;
-    --popover-foreground: 215 20.2% 65.1%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-
-    --card: 229 84% 5%;
-    --card-foreground: 213 31% 91%;
-
-    --terminal: 229 26% 16%;
-    --terminal-foreground: 229 9% 51%;
-    --terminal-thumb: 231 25% 22%;
-
-    --ring: 216 34% 17%;
   }
 
   @font-face {

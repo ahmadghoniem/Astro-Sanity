@@ -3,31 +3,50 @@ import '../main.css';
 import Header from "../components/Header.astro";
 import { ViewTransitions } from 'astro:transitions';
 
-import { sanityClient  } from "sanity:client";
-import { imageUrlFor } from "@/lib/utils";
-const query =  `*[_type == "author"][0] {
-        logo}
-        `;
-const {logo} = await sanityClient.fetch(query);
 
 const { title } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href={imageUrlFor(logo).width(48).bg("fff").url()} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<ViewTransitions />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
 
-	</head>
-	<body class="min-h-screen">
-		<Header/>
-		<slot />
-	</body>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/images/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="min-h-screen">
+    <Header />
+    <main>
+      <slot />
+    </main>
+  </body>
 </html>
-
