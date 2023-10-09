@@ -15,10 +15,29 @@ const query = `*[_type == "author"][0] {
 const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient.fetch(query);
 ---
 
-<Layout title="Welcome to Astro.">
-    <section class="p-12">
-        <h2>contact info</h2>
-<PortableText value={bio}/>
-        
+<Layout title="Contact">
+    <section class="p-12 flex md:flex-row flex-col justify-between gap-y-16 gap-x-[min(8vw,18.75rem)]">
+        <div class="[&_p]:leading-relaxed [&_p]:text-lg">
+            <PortableText value={bio}/>
+        </div>
+        <aside class="flex flex-col gap-y-12 text-lg  md:pb-32 md:pr-32 px-0">
+            <div>
+                <p class="mb-2">Contact</p>
+                <a class="underline" href=`mailto:${email}`>{email}</a>
+            </div>
+            <div>
+            <p class="mb-2">Follow</p>
+                <ul class="flex flex-col gap-y-4">
+                    <li><a target="_blank" class="underline" href={instagramLink}>Instagram</a></li>
+                    <li><a target="_blank" class="underline" href={artstationLink}>Artstation</a></li>
+                    <li><a target="_blank" class="underline" href={linkedinLink}>LinkedIn</a></li>
+                </ul>
+            </div>
+
+            
+            
+            
+            
+        </aside>
     </section>
   </Layout>

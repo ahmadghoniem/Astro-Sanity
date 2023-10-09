@@ -4,6 +4,7 @@ import LucideIcon from "./ui/LucideIcon.astro";
 import { sanityClient  } from "sanity:client";
 import NavLink from "@/components/ui/NavLink.astro";
 import {Instagram,Link2} from "lucide"
+import ThemeIcon from "./ui/ThemeIcon.astro";
 const query = `*[_type == "author"][0] {
         artstationLink,
         instagramLink,
@@ -16,6 +17,8 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
     <a href="/">
       <img width="120" src={imageUrlFor(logo).width(480).url()} alt="website logo" />
     </a>
+    <ThemeIcon  />
+
     <nav class="flex flex-row gap-8">
       <ul class="flex flex-row gap-6">
         <li>
@@ -28,10 +31,10 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
         </li>
       </ul>
       <div class="flex flex-row gap-6">
-          <a href={instagramLink} target="_blank">
+          <a href={instagramLink} target="_blank" aria-label="Click to view Instagram">
               <LucideIcon icon={Instagram} />
           </a>
-          <a href={artstationLink} target="_blank">
+          <a href={artstationLink} target="_blank" aria-label="Click to view Artstation">
                 <LucideIcon icon={Link2} />
           </a>
       </di>
