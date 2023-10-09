@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
-console.log("ANYBODY -> ", import.meta.env.PUBLIC_SANITY_PROJECT_DATASET);
+console.log("ANYBODY -> ", import.meta.env.DEV);
 
 // https://astro.build/config
 export default defineConfig({
