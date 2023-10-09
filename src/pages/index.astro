@@ -4,7 +4,10 @@ import Card from '@/components/Card.astro';
 import { sanityClient  } from "sanity:client";
 const query = `*[_type == "post"]`;
 const posts = await sanityClient.fetch(query);
-console.log("i ran again");
+console.log(JSON.stringify("1st->", import.meta.env.PUBLIC_VERCEL_ENV));
+console.log(JSON.stringify("2nd->", process.env.PUBLIC_VERCEL_ENV));
+console.log(JSON.stringify("3rd->", process.env.PUBLIC_SANITY_PROJECT_ID));
+console.log(JSON.stringify("4th->", process.env.SANITY_PROJECT_ID));
 ---
 <Layout title="Welcome to Astro.">
   <section class="p-12">
