@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
+console.log(JSON.stringify("1st->", import.meta.env.PUBLIC_VERCEL_ENV));
+console.log(JSON.stringify("2nd->", process.env.PUBLIC_VERCEL_ENV));
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,14 +12,8 @@ export default defineConfig({
     }),
     sanity({
       //TODO:env variables
-      projectId:
-        JSON.stringify(import.meta.env.PUBLIC_VERCEL_ENV) === "production"
-          ? JSON.stringify(import.meta.env.PUBLIC_SANITY_PROJECT_ID)
-          : import.meta.env.VITE_SANITY_PROJECT_ID,
-      dataset:
-        JSON.stringify(import.meta.env.PUBLIC_VERCEL_ENV) === "production"
-          ? JSON.stringify(import.meta.env.PUBLIC_SANITY_PROJECT_DATASET)
-          : import.meta.env.VITE_SANITY_PROJECT_DATASET,
+      projectId: "9ebfcrzt",
+      dataset: "production",
       // Set useCdn to false if you're building statically.
       useCdn: false,
       apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
