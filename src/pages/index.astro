@@ -5,7 +5,7 @@ import { sanityClient  } from "sanity:client";
 const query = `*[_type == "post"]`;
 const posts = await sanityClient.fetch(query);
 ---
-<Layout title="Welcome to Astro.">
+<Layout title="Welcome!">
   <section class="p-12">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
     {posts.length ? posts.map((post) => <Card post={post} />) : <h1>No content to preview, come back later!</h1>}
