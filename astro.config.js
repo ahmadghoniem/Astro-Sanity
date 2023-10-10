@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
 import { loadEnv } from "vite";
+import vercel from "@astrojs/vercel/serverless";
 const { SANITY_PROJECT_ID, SANITY_PROJECT_DATASET } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
@@ -23,4 +24,10 @@ export default defineConfig({
       apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
     }),
   ],
+  output: "server",
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
