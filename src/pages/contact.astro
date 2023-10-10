@@ -26,18 +26,16 @@ const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient
                 <a class="underline" href=`mailto:${email}`>{email}</a>
             </div>
             <div>
+                {
+                   (instagramLink||artstationLink||linkedinLink) && (
             <p class="mb-2">Follow</p>
                 <ul class="flex flex-col gap-y-4">
-                    <li><a target="_blank" class="underline" href={instagramLink}>Instagram</a></li>
-                    <li><a target="_blank" class="underline" href={artstationLink}>Artstation</a></li>
-                    <li><a target="_blank" class="underline" href={linkedinLink}>LinkedIn</a></li>
-                </ul>
+                   {instagramLink && <li><a target="_blank" class="underline" href={instagramLink}>Instagram</a></li> }
+                   {artstationLink &&    <li><a target="_blank" class="underline" href={artstationLink}>Artstation</a></li> }
+                  { linkedinLink && <li><a target="_blank" class="underline" href={linkedinLink}>LinkedIn</a></li>}
+                </ul>)
             </div>
-
-            
-            
-            
-            
+        }
         </aside>
     </section>
   </Layout>

@@ -15,7 +15,7 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
 ---
 <header class="p-12 flex flex-row justify-between items-center">
     <a href="/">
-      <img width="120" src={imageUrlFor(logo).width(480).url()} alt="website logo" />
+      <img width="120" height="120"  class="dark:invert aspect-square" src={imageUrlFor(logo).width(480).url()} alt="website logo" />
     </a>
     <ThemeIcon  />
 
