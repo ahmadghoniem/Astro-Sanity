@@ -24,7 +24,7 @@ export default defineConfig({
       apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
     }),
   ],
-  output: "server",
+  output: "static",
   adapter: vercel({
     webAnalytics: {
       enabled: true,
