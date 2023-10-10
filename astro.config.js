@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
 import { loadEnv } from "vite";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 const { SANITY_PROJECT_ID, SANITY_PROJECT_DATASET } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
