@@ -38,24 +38,29 @@ const {slug, title,excerpt,images,prevArticle,nextArticle } = Astro.props;
 ---
 <Layout title={title}>
   <section class="p-12"  >
-    <article transition:name={slug.current}>
+    <article >
       <figure class="grid grid-cols-6 grid-row-[min_content] gap-4">
         <figcaption style="--text-multiplier: 1.5;" class="text-center col-span-6 max-w-5xl mx-auto mb-32">
           <PortableText value={excerpt} />
         </figcaption>
-        {images.map((img) => {
-          console.log(img);
+        <div class="container">
+
+        {images.map((img,index) => {
           return ( 
           <img
             class={`w-full ${img.colSpan}`}
             width={img.asset.metadata.dimensions.width}
             height={img.asset.metadata.dimensions.height}
             src={imageUrlFor(img).format("webp").url()}
+            transition:name={ index=== 0 && slug.current}
             alt={title}
             loading="lazy"
           />
+
         )
         })}
+        </div>
+
       </figure>
     </article>
 

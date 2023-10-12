@@ -5,12 +5,12 @@ import { imageUrlFor } from "@/lib/utils";
 const { post } = Astro.props;
 ---
 <a
-transition:name={post.slug.current}
+
 class="col-span-3 sm:col-span-1 group"
 href={`/work/${post.slug.current}`}
 >
 <article>
-<figure class="group-hover:opacity-70 transition-opacity duration-100">
+<figure class="group-hover:opacity-70 transition-opacity duration-100" transition:name={post.slug.current}>
       <img
       class="rounded-sm"
         src={imageUrlFor(post.images[0]).width(640).height(640).url()}
