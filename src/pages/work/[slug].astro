@@ -11,10 +11,13 @@ export async function getStaticPaths() {
   ...,
   images[] {
     asset->{
+      dominant,
       metadata{
+        palette,
       dimensions {
-    height,
-      width
+        width,
+        height,
+        "twAspectRatio":"auto_" + string(width) + "_/_" + string(height),
       }
       },
       url
@@ -28,39 +31,50 @@ export async function getStaticPaths() {
     const prevArticle=posts[id-1];
     const nextArticle=posts[id+1];
     const { slug, title, excerpt,images } = props;
+    let processedImgs = images.map((img,index)=>({
+      width:img.asset.metadata.dimensions.width,
+            height:img.asset.metadata.dimensions.height,
+            src:imageUrlFor(img).auto("format").url(),
+            alt:title,
+            aspectRatio:img.asset.metadata.dimensions.aspectRatio,
+            "transition:name":index === 0 ?  slug.current : undefined,
+            BgColorLight:img.asset.metadata.palette.lightMuted.background,
+            BgColorDark:img.asset.metadata.palette.darkMuted.background,
+            colSpan:img.colSpan,
+            twAspectRatio:img.asset.metadata.dimensions.twAspectRatio
+              }));
     return {
       params: { slug: slug.current },
-      props: { slug, title,excerpt,images,prevArticle,nextArticle },
+      props: { slug, title,excerpt,processedImgs,prevArticle,nextArticle },
     };
   });
 }
-const {slug, title,excerpt,images,prevArticle,nextArticle } = Astro.props;
+const {slug, title,excerpt,processedImgs,prevArticle,nextArticle } = Astro.props;
 ---
 <Layout title={title}>
   <section class="p-12"  >
     <article >
-      <figure class="grid grid-cols-6 grid-row-[min_content] gap-4">
+      <figure class="grid grid-cols-6 grid-rows-[min-content_1fr] gap-4">
         <figcaption style="--text-multiplier: 1.5;" class="text-center col-span-6 max-w-5xl mx-auto mb-32">
           <PortableText value={excerpt} />
         </figcaption>
-        <div class="container">
 
-        {images.map((img,index) => {
+        {processedImgs.map((imgObj,index) => {
+          console.log(imgObj);
           return ( 
+          <div style={`--bg-color-light:${imgObj.BgColorLight}; --bg-color-dark:${imgObj.BgColorDark}`} class={`flex ${imgObj.colSpan} dark:bg-[--bg-color-dark] bg-[--bg-color-light]`}>
           <img
-            class={`w-full ${img.colSpan}`}
-            width={img.asset.metadata.dimensions.width}
-            height={img.asset.metadata.dimensions.height}
-            src={imageUrlFor(img).format("webp").url()}
-            transition:name={ index=== 0 && slug.current}
-            alt={title}
-            loading="lazy"
+          style={`--aspect-ratio:${imgObj.twAspectRatio}`}
+            width={imgObj.width}
+            height={imgObj.height}
+            src={imgObj.src}
+            alt={imgObj.alt}
+            transition:name={imgObj["transition:name"]}
+            class="object-[50%_50%] m-auto aspect-[--aspect-ratio]"
           />
-
+        </div>
         )
         })}
-        </div>
-
       </figure>
     </article>
 
@@ -85,4 +99,6 @@ const {slug, title,excerpt,images,prevArticle,nextArticle } = Astro.props;
       )}
     </div>
   </section>
-</Layout>;
+</Layout>
+
+        

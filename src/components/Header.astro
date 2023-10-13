@@ -17,9 +17,9 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
     <a href="/">
       <img width="120" height="120"  class="dark:invert aspect-square" src={imageUrlFor(logo).width(480).url()} alt="website logo" />
     </a>
-<div class="flex flex-row gap-2">
-    <nav class="flex flex-row gap-8">
-      <ul class="flex flex-row gap-6">
+<div class="flex flex-row gap-6">
+    <nav class="flex flex-row gap-6">
+      <ul class="flex flex-row gap-4">
         <li>
           <NavLink class="active:underline" href="/">
             work
@@ -30,11 +30,11 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
         </li>
       </ul>
       <div class="flex flex-row gap-6">
+        <a href={artstationLink} target="_blank" aria-label="Click to view Artstation">
+          <LucideIcon icon={Link2} />
+    </a>
           <a href={instagramLink} target="_blank" aria-label="Click to view Instagram">
               <LucideIcon icon={Instagram} />
-          </a>
-          <a href={artstationLink} target="_blank" aria-label="Click to view Artstation">
-                <LucideIcon icon={Link2} />
           </a>
       </div>
     </nav>
