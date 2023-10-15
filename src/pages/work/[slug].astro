@@ -37,7 +37,7 @@ export async function getStaticPaths() {
             src:imageUrlFor(img).auto("format").url(),
             alt:title,
             aspectRatio:img.asset.metadata.dimensions.aspectRatio,
-            "transition:name":index === 0 ?  slug.current : undefined,
+            transitionName:index === 0 ?  slug.current : undefined,
             BgColorLight:img.asset.metadata.palette.lightMuted.background,
             BgColorDark:img.asset.metadata.palette.darkMuted.background,
             colSpan:img.colSpan,
@@ -52,25 +52,24 @@ export async function getStaticPaths() {
 const {slug, title,excerpt,processedImgs,prevArticle,nextArticle } = Astro.props;
 ---
 <Layout title={title}>
-  <section class="p-12"  >
-    <article >
-      <figure class="grid grid-cols-6 grid-rows-[min-content_1fr] gap-4">
+  <section class="p-14">
+    <article>
+      <figure class="grid grid-cols-6 grid-rows-[min-content_1fr] gap-2">
         <figcaption style="--text-multiplier: 1.5;" class="text-center col-span-6 max-w-5xl mx-auto mb-32">
           <PortableText value={excerpt} />
         </figcaption>
 
-        {processedImgs.map((imgObj,index) => {
-          console.log(imgObj);
+        {processedImgs.map(({BgColorLight,BgColorDark,twAspectRatio,width,height,src,alt,transitionName,colSpan},index) => {
           return ( 
-          <div style={`--bg-color-light:${imgObj.BgColorLight}; --bg-color-dark:${imgObj.BgColorDark}`} class={`flex ${imgObj.colSpan} dark:bg-[--bg-color-dark] bg-[--bg-color-light]`}>
+          <div style={`--bg-color-light:${BgColorLight}; --bg-color-dark:${BgColorDark}`} class={`${colSpan} overflow-hidden`}>
           <img
-          style={`--aspect-ratio:${imgObj.twAspectRatio}`}
-            width={imgObj.width}
-            height={imgObj.height}
-            src={imgObj.src}
-            alt={imgObj.alt}
-            transition:name={imgObj["transition:name"]}
-            class="object-[50%_50%] m-auto aspect-[--aspect-ratio]"
+          style={`--aspect-ratio:${twAspectRatio}`}
+            width={width}
+            height={height}
+            src={src}
+            alt={alt}
+            transition:name={transitionName}
+            class="object-cover aspect-[--aspect-ratio]"
           />
         </div>
         )
