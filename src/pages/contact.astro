@@ -16,11 +16,11 @@ const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient
 ---
 
 <Layout title="Contact">
-    <section class="p-12 flex md:flex-row flex-col justify-between gap-y-16 gap-x-[min(8vw,18.75rem)]">
-        <div class="[&_p]:leading-relaxed [&_p]:text-lg">
+    <section class="p-12 flex md:flex-row flex-col justify-between">
+        <div class="[&_p]:leading-relaxed [&_p]:text-lg max-w-4xl">
             <PortableText value={bio}/>
         </div>
-        <aside class="flex flex-col gap-y-12 text-lg  md:pb-32 md:pr-32 px-0">
+        <aside class="flex flex-col  p-0 mt-10 md:m-0 md:px-8 gap-10">
             <div>
                 <p class="mb-2">Contact</p>
                 <a class="underline" href=`mailto:${email}`>{email}</a>
