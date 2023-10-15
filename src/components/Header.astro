@@ -33,6 +33,9 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
             </NavLink>
           </li>
           <li>
+            <NavLink href="/about">About</NavLink>
+          </li>
+          <li>
             <NavLink href="/contact">contact</NavLink>
           </li>
         </ul>
@@ -45,10 +48,6 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
             </a>
         </div>
       </nav>
-      <button class="themeToggle">
-        <LucideIcon icon={Sun} class="hidden dark:block" />
-        <LucideIcon icon={Moon} class="block dark:hidden" />
-      </button>
     </div>
 
 <!-- mobile nav -->
@@ -61,8 +60,12 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
         </NavLink>
       </li>
       <li>
-        <NavLink href="/contact">contact</NavLink>
+        <NavLink href="/about">About</NavLink>
       </li>
+      <li>
+        <NavLink href="/contact">Contact</NavLink>
+      </li>
+
     </ul>
   </nav>
   <div class="flex flex-row gap-6 mb-4">
@@ -72,10 +75,6 @@ const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
       <a href={instagramLink} target="_blank" aria-label="Click to view Instagram">
           <LucideIcon icon={Instagram} />
       </a>
-      <button class="themeToggle">
-        <LucideIcon icon={Sun} class="hidden dark:block" />
-        <LucideIcon icon={Moon} class="block dark:hidden" />
-      </button>
   </div>
 
 </div>
