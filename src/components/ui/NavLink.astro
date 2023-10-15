@@ -9,4 +9,4 @@ const isRoot = href==="/";
 const isActive = (cleanedPath === href || isRoot && cleanedPath.includes("/work/"));
 
 ---
-<a class={ cn("hover:opacity-90 underline-offset-4",isActive&&"underline font-semibold",classList)} href={href}><slot /></a>
+<a class={ cn("hover:opacity-90 underline-offset-4",isActive&&"underline font-semibold",classList)} href={href} aria-current={isActive && "page" || ""}><slot /></a>

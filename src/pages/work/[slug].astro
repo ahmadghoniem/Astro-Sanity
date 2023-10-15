@@ -34,7 +34,7 @@ export async function getStaticPaths() {
     let processedImgs = images.map((img,index)=>({
       width:img.asset.metadata.dimensions.width,
             height:img.asset.metadata.dimensions.height,
-            src:imageUrlFor(img).auto("format").url(),
+            src:imageUrlFor(img).format("webp").url(),
             alt:title,
             aspectRatio:img.asset.metadata.dimensions.aspectRatio,
             transitionName:index === 0 ?  slug.current : undefined,
