@@ -20,13 +20,16 @@ export default defineConfig({
       projectId: SANITY_PROJECT_ID,
       dataset: SANITY_PROJECT_DATASET,
       // Set useCdn to false if you're building statically.
-      useCdn: true,
+      useCdn: false,
       apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
     }),
   ],
   output: "static",
   adapter: vercel({
     webAnalytics: {
+      enabled: true,
+    },
+    speedInsights: {
       enabled: true,
     },
   }),
