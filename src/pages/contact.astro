@@ -1,10 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { sanityClient  } from "sanity:client";
-import { PortableText } from "astro-portabletext";
 
 const query = `*[_type == "author"][0] {
-    bio,
+    name,
     email,
     linkedinLink,
         artstationLink,
@@ -12,16 +11,11 @@ const query = `*[_type == "author"][0] {
             }
         `;
         
-const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient.fetch(query);
+const {name,email,linkedinLink,artstationLink,instagramLink} = await sanityClient.fetch(query);
 ---
 
-<Layout title="Contact">
+<Layout title=`Contact ${name}`>
     <section class="p-12 flex md:flex-row flex-col justify-between">
-        <div class="[&_p]:leading-relaxed [&_p]:text-lg max-w-4xl">
-            <PortableText value={bio}/>
-        </div>
-        <aside class="flex flex-col  p-0 mt-10 md:m-0 md:px-8 gap-10">
-            <div>
                 <p class="mb-2">Contact</p>
                 <a class="underline" href=`mailto:${email}`>{email}</a>
             </div>
@@ -34,8 +28,6 @@ const {bio,email,linkedinLink,artstationLink,instagramLink} = await sanityClient
                    {artstationLink &&    <li><a target="_blank" class="underline" href={artstationLink}>Artstation</a></li> }
                   { linkedinLink && <li><a target="_blank" class="underline" href={linkedinLink}>LinkedIn</a></li>}
                 </ul>)
-            </div>
         }
-        </aside>
     </section>
   </Layout>

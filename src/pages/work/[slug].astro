@@ -54,7 +54,7 @@ const {slug, title,excerpt,processedImgs,prevArticle,nextArticle } = Astro.props
 <Layout title={title}>
   <section class="p-14">
     <article>
-      <figure class="grid grid-cols-6 grid-rows-[min-content_1fr] gap-2">
+      <figure class="grid grid-cols-6 grid-rows-[min-content_1fr] justify-items-center gap-2">
         <figcaption style="--text-multiplier: 1.5;" class="text-center col-span-6 max-w-5xl mx-auto mb-32">
           <PortableText value={excerpt} />
         </figcaption>

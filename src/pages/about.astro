@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { sanityClient  } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+
+const query = `*[_type == "author"][0] {
+    name,
+    bio,
+    email,
+    linkedinLink,
+        artstationLink,
+        instagramLink,
+            }
+        `;
+        
+const {name, bio} = await sanityClient.fetch(query);
+---
+<Layout title=`About ${name}`>
+    <section class="p-12 flex md:flex-row flex-col justify-between">
+        <div class="[&_p]:leading-relaxed [&_p]:text-lg max-w-4xl">
+            <PortableText value={bio}/>
+        </div>
+    </section>
+  </Layout>
