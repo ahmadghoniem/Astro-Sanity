@@ -2,7 +2,6 @@
 import "../main.css";
 import Header from "../components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
-const websiteOrigin = window.location.origin;
 const { title } = Astro.props;
 ---
 
@@ -46,7 +45,7 @@ const { title } = Astro.props;
       content="Welcome to my creative realm! I'm Abdel, an Egyptian Canadian Illustrator and Concept Artist based in Canada. Explore my journey from a novice artist to a character conjurer. Join me in the world of visual storytelling, vibrant designs, and endless inspiration."
     />
     <meta property="og:type" content="profile" />
-    <meta property="og:image" content={`${websiteOrigin}/og.svg`} />
+    <meta property="og:image" content={`${process.env.VERCEL_URL}/og.svg`} />
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-background text-foreground">
