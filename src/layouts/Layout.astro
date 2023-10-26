@@ -2,7 +2,7 @@
 import "../main.css";
 import Header from "../components/Header.astro";
 import { ViewTransitions } from "astro:transitions";
-const websiteOrigin = Astro.url.origin;
+const websiteOrigin = window.location.origin;
 const { title } = Astro.props;
 ---
 
