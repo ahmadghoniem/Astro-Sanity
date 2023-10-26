@@ -1,81 +1,108 @@
 ---
+import { sanityClient } from "sanity:client";
 import { imageUrlFor } from "@/lib/utils";
-import { sanityClient  } from "sanity:client";
 import NavLink from "@/components/ui/NavLink.astro";
-import {Instagram,Link2, Menu, X} from "lucide"
-import LucideIcon from '@/components/ui/LucideIcon.astro';
-import {Sun, Moon} from "lucide"
+import { Instagram, Link2, Menu, X } from "lucide";
+import LucideIcon from "@/components/ui/LucideIcon.astro";
 const query = `*[_type == "author"][0] {
         artstationLink,
         instagramLink,
         logo    }
         `;
-const {artstationLink,instagramLink,logo} = await sanityClient.fetch(query
-   );
+const { artstationLink, instagramLink, logo } = await sanityClient.fetch(query);
 ---
+
 <header class="p-12 flex flex-row justify-between items-center flex-wrap">
-    <a href="/">
-      <img width="480 " height="480"  class="dark:invert aspect-square w-20 sm:w-24 md:w-32" src={imageUrlFor(logo).width(480).url()} alt="website logo" />
-    </a>
-    
-    <button id="toggleMobileNav" class="inline group peer sm:hidden " data-is-mobile-nav-open="false">
-      <LucideIcon class="group-data-[is-mobile-nav-open=false]:block hidden" icon={Menu} />
-        <LucideIcon class="group-data-[is-mobile-nav-open=true]:block z-20 hidden" icon={X} />
-      </button>
+  <a href="/">
+    <img
+      width="480 "
+      height="480"
+      class="aspect-square w-20 sm:w-24 md:w-32"
+      src={imageUrlFor(logo).width(480).url()}
+      alt="website logo"
+    />
+  </a>
 
-<!-- desktop nav -->
-    <div class="hidden flex-row gap-6 sm:flex">
-      <nav class="flex flex-row gap-6">
-        <ul class="flex flex-row gap-4">
-          <li>
-            <NavLink class="active:underline" href="/">
-              work
-            </NavLink>
-          </li>
-          <li>
-            <NavLink href="/about">About</NavLink>
-          </li>
-          <li>
-            <NavLink href="/contact">contact</NavLink>
-          </li>
-        </ul>
-        <div class="flex flex-row gap-6">
-          <a href={artstationLink} target="_blank" aria-label="Click to view Artstation">
-            <LucideIcon icon={Link2} />
-      </a>
-            <a href={instagramLink} target="_blank" aria-label="Click to view Instagram">
-                <LucideIcon icon={Instagram} />
-            </a>
-        </div>
-      </nav>
-    </div>
+  <button
+    id="toggleMobileNav"
+    class="inline group peer sm:hidden"
+    data-is-mobile-nav-open="false"
+  >
+    <LucideIcon
+      class="group-data-[is-mobile-nav-open=false]:block hidden"
+      icon={Menu}
+    />
+    <LucideIcon
+      class="group-data-[is-mobile-nav-open=true]:block z-20 hidden"
+      icon={X}
+    />
+  </button>
 
-<!-- mobile nav -->
-<div class="basis-full hidden peer-data-[is-mobile-nav-open=true]:flex flex-col items-center sm:!hidden min-h-[calc(100vh-5rem)] justify-around bg-background">
-  <nav class="text-3xl">
-    <ul class="flex flex-col items-center gap-4">
-      <li>
-        <NavLink class="active:underline" href="/">
-          work
-        </NavLink>
-      </li>
-      <li>
-        <NavLink href="/about">About</NavLink>
-      </li>
-      <li>
-        <NavLink href="/contact">Contact</NavLink>
-      </li>
-
-    </ul>
-  </nav>
-  <div class="flex flex-row gap-6 mb-4">
-    <a href={artstationLink} target="_blank" aria-label="Click to view Artstation">
-      <LucideIcon icon={Link2} />
-</a>
-      <a href={instagramLink} target="_blank" aria-label="Click to view Instagram">
+  <!-- desktop nav -->
+  <div class="hidden flex-row gap-6 sm:flex">
+    <nav class="flex flex-row gap-6">
+      <ul class="flex flex-row gap-4">
+        <li>
+          <NavLink class="active:underline" href="/">work</NavLink>
+        </li>
+        <li>
+          <NavLink href="/about">About</NavLink>
+        </li>
+        <li>
+          <NavLink href="/contact">contact</NavLink>
+        </li>
+      </ul>
+      <div class="flex flex-row gap-6">
+        <a
+          href={artstationLink}
+          target="_blank"
+          aria-label="Click to view Artstation"
+        >
+          <LucideIcon icon={Link2} />
+        </a>
+        <a
+          href={instagramLink}
+          target="_blank"
+          aria-label="Click to view Instagram"
+        >
           <LucideIcon icon={Instagram} />
-      </a>
+        </a>
+      </div>
+    </nav>
   </div>
 
-</div>
-  </header>
+  <!-- mobile nav -->
+  <div
+    class="basis-full hidden peer-data-[is-mobile-nav-open=true]:flex flex-col items-center sm:!hidden min-h-[calc(100vh-5rem)] justify-around bg-background"
+  >
+    <nav class="text-3xl">
+      <ul class="flex flex-col items-center gap-4">
+        <li>
+          <NavLink class="active:underline" href="/">work</NavLink>
+        </li>
+        <li>
+          <NavLink href="/about">About</NavLink>
+        </li>
+        <li>
+          <NavLink href="/contact">Contact</NavLink>
+        </li>
+      </ul>
+    </nav>
+    <div class="flex flex-row gap-6 mb-4">
+      <a
+        href={artstationLink}
+        target="_blank"
+        aria-label="Click to view Artstation"
+      >
+        <LucideIcon icon={Link2} />
+      </a>
+      <a
+        href={instagramLink}
+        target="_blank"
+        aria-label="Click to view Instagram"
+      >
+        <LucideIcon icon={Instagram} />
+      </a>
+    </div>
+  </div>
+</header>

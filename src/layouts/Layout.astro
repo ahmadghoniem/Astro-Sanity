@@ -1,10 +1,11 @@
 ---
-import '../main.css';
+import "../main.css";
 import Header from "../components/Header.astro";
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 
 const { title } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en" class="sm:overflow-auto">
   <head>
@@ -29,7 +30,7 @@ const { title } = Astro.props;
       sizes="16x16"
       href="/images/favicon-16x16.png"
     />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <link rel="manifest" href="/site.webmanifest" />
     <link
@@ -38,31 +39,31 @@ const { title } = Astro.props;
       color="#5bbad5"
     />
 
-
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    
   </head>
-  <body class="min-h-screen bg-background text-foreground " >
-    <Header transition:persist/>
+  <body class="min-h-screen bg-background text-foreground">
+    <Header transition:persist />
     <main>
       <slot />
     </main>
     <script is:inline>
+      const handleMobileNavToggleClick = (e) => {
+        const isMobileNavOpen =
+          e.currentTarget.dataset.isMobileNavOpen === "true";
+        if (isMobileNavOpen) {
+          e.currentTarget.dataset.isMobileNavOpen = "false";
+        } else {
+          e.currentTarget.dataset.isMobileNavOpen = "true";
+        }
+        document.documentElement.classList.toggle("overflow-hidden");
+      };
 
-const handleMobileNavToggleClick = (e) => {
-  const isMobileNavOpen = e.currentTarget.dataset.isMobileNavOpen === "true";
-  if (isMobileNavOpen) {
-    e.currentTarget.dataset.isMobileNavOpen = "false"
-  } else {
-    e.currentTarget.dataset.isMobileNavOpen = "true"
-  }
-  document.documentElement.classList.toggle("overflow-hidden");
-};
-
-document.addEventListener('astro:page-load', () => {
-    document.getElementById("toggleMobileNav").addEventListener("click",handleMobileNavToggleClick);
-  });
+      document.addEventListener("astro:page-load", () => {
+        document
+          .getElementById("toggleMobileNav")
+          .addEventListener("click", handleMobileNavToggleClick);
+      });
     </script>
   </body>
 </html>

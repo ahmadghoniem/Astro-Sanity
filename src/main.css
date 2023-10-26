@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
+  /* h1 {
     @apply text-[calc(clamp(1.5rem,2vw,2rem)*var(--text-multiplier,1))] leading-normal font-bold;
   }
   h2 {
@@ -20,7 +20,7 @@
   }
   h6 {
     @apply text-[0.67rem] font-medium;
-  }
+  } */
 
   :root {
     --font-sans: Open Sans;

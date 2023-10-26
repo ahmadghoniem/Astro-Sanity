@@ -1,5 +1,4 @@
 ---
-
 const { icon, ...props } = Astro.props;
 const [, attributes, children] = icon;
 
@@ -8,16 +7,16 @@ const componentChildren = children
     ([child, attributes]) =>
       `<${child} ${Object.entries(attributes)
         .map(([k, v]) => `${k}="${v}"`)
-        .join(" ")} />`
+        .join(" ")} />`,
   )
   .join("\n");
 
 // 3. Merge `attributes` and `props`
-const componentAttributes = {...attributes, ...props}
+const componentAttributes = { ...attributes, ...props };
 ---
 
 <svg
   {/* 4. Apply munged `componentAttributes` to svg */}
-{...componentAttributes}
+  {...componentAttributes}
   set:html={componentChildren}
 />

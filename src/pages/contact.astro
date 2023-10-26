@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { sanityClient  } from "sanity:client";
+import { sanityClient } from "sanity:client";
 
 const query = `*[_type == "author"][0] {
     name,
@@ -10,24 +10,46 @@ const query = `*[_type == "author"][0] {
         instagramLink,
             }
         `;
-        
-const {name,email,linkedinLink,artstationLink,instagramLink} = await sanityClient.fetch(query);
+
+const { name, email, linkedinLink, artstationLink, instagramLink } =
+  await sanityClient.fetch(query);
 ---
 
 <Layout title=`Contact ${name}`>
-    <section class="p-12 flex md:flex-row flex-col justify-between">
-                <p class="mb-2">Contact</p>
-                <a class="underline" href=`mailto:${email}`>{email}</a>
-            </div>
-            <div>
-                {
-                   (instagramLink||artstationLink||linkedinLink) && (
-            <p class="mb-2">Follow</p>
-                <ul class="flex flex-col gap-y-4">
-                   {instagramLink && <li><a target="_blank" class="underline" href={instagramLink}>Instagram</a></li> }
-                   {artstationLink &&    <li><a target="_blank" class="underline" href={artstationLink}>Artstation</a></li> }
-                  { linkedinLink && <li><a target="_blank" class="underline" href={linkedinLink}>LinkedIn</a></li>}
-                </ul>)
-        }
-    </section>
-  </Layout>
+  <section class="p-12 flex md:flex-row flex-col justify-between">
+    <p class="mb-2">Contact</p>
+    <a class="underline" href=`mailto:${email}`>{email}</a>
+  </section>
+  <div>
+    {
+      (instagramLink || artstationLink || linkedinLink) && (
+        <>
+          <p class="mb-2">Follow</p>
+          <ul class="flex flex-col gap-y-4">
+            {instagramLink && (
+              <li>
+                <a target="_blank" class="underline" href={instagramLink}>
+                  Instagram
+                </a>
+              </li>
+            )}
+            {artstationLink && (
+              <li>
+                <a target="_blank" class="underline" href={artstationLink}>
+                  Artstation
+                </a>
+              </li>
+            )}
+            {linkedinLink && (
+              <li>
+                <a target="_blank" class="underline" href={linkedinLink}>
+                  LinkedIn
+                </a>
+              </li>
+            )}
+          </ul>
+        </>
+      )
+    }
+  </div>
+</Layout>
