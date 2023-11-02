@@ -2,8 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
 
-const query = `*[_type == "author"][0] {
-    name,
+const query = `*[_type == "socials"][0] {
     email,
     linkedinLink,
         artstationLink,
@@ -11,11 +10,11 @@ const query = `*[_type == "author"][0] {
             }
         `;
 
-const { name, email, linkedinLink, artstationLink, instagramLink } =
+const { email, linkedinLink, artstationLink, instagramLink } =
   await sanityClient.fetch(query);
 ---
 
-<Layout title=`Contact ${name}`>
+<Layout title="Contact">
   <section class="p-12 flex md:flex-row flex-col justify-between">
     <p class="mb-2">Contact</p>
     <a class="underline" href=`mailto:${email}`>{email}</a>
