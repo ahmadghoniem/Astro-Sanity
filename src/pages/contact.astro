@@ -1,8 +1,11 @@
 ---
+import LucideIcon from "@/components/ui/LucideIcon.astro";
 import Layout from "@/layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
-
-const query = `*[_type == "socials"][0] {
+import Artstation from "/images/artstation.svg?raw";
+import LinkedIn from "/images/linkedin.svg?raw";
+import Instagram from "/images/instagram.svg?raw";
+const query = `*[_type == "contacts"][0] {
     email,
     linkedinLink,
         artstationLink,
@@ -30,12 +33,18 @@ const { email, linkedinLink, artstationLink, instagramLink } =
                 <a target="_blank" class="underline" href={instagramLink}>
                   Instagram
                 </a>
+                <div class="w-6 h-6">
+                  <Fragment set:html={Artstation} />
+                </div>
               </li>
             )}
             {artstationLink && (
               <li>
                 <a target="_blank" class="underline" href={artstationLink}>
                   Artstation
+                  <div class="w-6 h-6">
+                    <Fragment set:html={Instagram} />
+                  </div>
                 </a>
               </li>
             )}
@@ -43,6 +52,9 @@ const { email, linkedinLink, artstationLink, instagramLink } =
               <li>
                 <a target="_blank" class="underline" href={linkedinLink}>
                   LinkedIn
+                  <div class="w-6 h-6">
+                    <Fragment set:html={LinkedIn} class="w-6 h-6" />
+                  </div>
                 </a>
               </li>
             )}

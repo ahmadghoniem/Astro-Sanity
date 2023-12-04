@@ -7,7 +7,7 @@ import LucideIcon from "@/components/ui/LucideIcon.astro";
 import { ChevronLeft, ChevronRight } from "lucide";
 
 export async function getStaticPaths() {
-  const query = `*[_type == "concept-art"] {
+  const query = `*[_type == "concept-art"]|order(orderRank) {
   ...,
   images[] {
     asset->{
@@ -54,7 +54,6 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
         class="grid grid-cols-6 grid-rows-[min-content_1fr] justify-items-center gap-2"
       >
         <figcaption
-          style="--text-multiplier: 1.5;"
           class="text-center prose prose-slate prose-lg col-span-6 max-w-5xl mx-auto mb-32"
         >
           <PortableText value={excerpt} />
