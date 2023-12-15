@@ -30,7 +30,11 @@ const { email, linkedinLink, artstationLink, instagramLink } =
           <ul class="flex flex-col gap-y-4">
             {instagramLink && (
               <li>
-                <a target="_blank" class="underline" href={instagramLink}>
+                <a
+                  target="_blank"
+                  class="flex gap-2 underline"
+                  href={instagramLink}
+                >
                   Instagram
                 </a>
                 <div class="w-6 h-6">
@@ -40,9 +44,13 @@ const { email, linkedinLink, artstationLink, instagramLink } =
             )}
             {artstationLink && (
               <li>
-                <a target="_blank" class="underline" href={artstationLink}>
+                <a
+                  target="_blank"
+                  href={artstationLink}
+                  class="flex gap-2 underline"
+                >
                   Artstation
-                  <div class="w-6 h-6">
+                  <div class="w-4 h-4">
                     <Fragment set:html={Instagram} />
                   </div>
                 </a>
@@ -50,9 +58,13 @@ const { email, linkedinLink, artstationLink, instagramLink } =
             )}
             {linkedinLink && (
               <li>
-                <a target="_blank" class="underline" href={linkedinLink}>
+                <a
+                  target="_blank"
+                  class="flex gap-2 underline"
+                  href={linkedinLink}
+                >
                   LinkedIn
-                  <div class="w-6 h-6">
+                  <div class="w-4 h-4">
                     <Fragment set:html={LinkedIn} class="w-6 h-6" />
                   </div>
                 </a>
@@ -64,7 +76,7 @@ const { email, linkedinLink, artstationLink, instagramLink } =
     }
   </div>
   <div>
-    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <!-- <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
       <h2
         class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white"
       >
@@ -126,7 +138,7 @@ const { email, linkedinLink, artstationLink, instagramLink } =
           >Send message</button
         >
       </form>
-    </div>
+    </div> -->
     <script>
       const handlesubmit = (e) => {
         e.preventDefault();
