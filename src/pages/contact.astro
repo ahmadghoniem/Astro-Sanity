@@ -18,7 +18,7 @@ const { email, linkedinLink, artstationLink, instagramLink } =
   await sanityClient.fetch(query);
 
 // mine: service_g484pnr, template_hh74isr, bxUntg1rqcG0GTe2e
-// his :             "service_igahi2u", "template_ek6c6ef",
+// his :             "service_igahi2u", "template_ek6c6ef", 9HBMP2kjnUixeomHd
 ---
 
 <Layout title="Contact">
@@ -152,26 +152,40 @@ const { email, linkedinLink, artstationLink, instagramLink } =
       </div>
     </div>
   </section>
-</Layout>
-<script
-  is:inline
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-></script>
-<script is:inline>
-  document
-    .getElementById("contactForm")
-    .addEventListener("submit", async (e) => {
-      e.preventDefault();
-      try {
-        let response = await emailjs.sendForm(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-          "#contactForm",
-          import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-        );
-        console.log("done!");
-      } catch (err) {
-        console.log("error!");
+  <script>
+    import emailjs from "@emailjs/browser";
+
+    document.addEventListener("astro:page-load", () => {
+      const isDev = import.meta.env.DEV;
+      const EMAILJS = { SERVICE_ID: "", TEMPLATE_ID: "", PUBLIC_KEY: "" };
+      if (isDev) {
+        EMAILJS.SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+        EMAILJS.TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+        EMAILJS.PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+      } else {
+        EMAILJS.SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+        EMAILJS.TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+        EMAILJS.PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+      }
+
+      if (document.querySelector("#contactForm")) {
+        document
+          .querySelector("#contactForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            try {
+              let response = await emailjs.sendForm(
+                EMAILJS.SERVICE_ID,
+                EMAILJS.TEMPLATE_ID,
+                "#contactForm",
+                EMAILJS.PUBLIC_KEY,
+              );
+              console.log(response);
+            } catch (err) {
+              console.log(err);
+            }
+          });
       }
     });
-</script>
+  </script>
+</Layout>
