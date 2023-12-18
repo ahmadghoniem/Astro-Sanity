@@ -5,6 +5,7 @@ import { sanityClient } from "sanity:client";
 import Artstation from "/images/artstation.svg?raw";
 import LinkedIn from "/images/linkedin.svg?raw";
 import Instagram from "/images/instagram.svg?raw";
+
 const query = `*[_type == "contacts"][0] {
     email,
     linkedinLink,
@@ -15,135 +16,162 @@ const query = `*[_type == "contacts"][0] {
 
 const { email, linkedinLink, artstationLink, instagramLink } =
   await sanityClient.fetch(query);
+
+// mine: service_g484pnr, template_hh74isr, bxUntg1rqcG0GTe2e
+// his :             "service_igahi2u", "template_ek6c6ef",
 ---
 
 <Layout title="Contact">
-  <section class="p-12 flex md:flex-row flex-col justify-between">
-    <p class="mb-2">Contact</p>
-    <a class="underline" href=`mailto:${email}`>{email}</a>
-  </section>
-  <div>
-    {
-      (instagramLink || artstationLink || linkedinLink) && (
-        <>
-          <p class="mb-2">Follow</p>
-          <ul class="flex flex-col gap-y-4">
-            {instagramLink && (
-              <li>
-                <a
-                  target="_blank"
-                  class="flex gap-2 underline"
-                  href={instagramLink}
-                >
-                  Instagram
-                </a>
-                <div class="w-6 h-6">
-                  <Fragment set:html={Artstation} />
-                </div>
-              </li>
-            )}
-            {artstationLink && (
-              <li>
-                <a
-                  target="_blank"
-                  href={artstationLink}
-                  class="flex gap-2 underline"
-                >
-                  Artstation
-                  <div class="w-4 h-4">
-                    <Fragment set:html={Instagram} />
-                  </div>
-                </a>
-              </li>
-            )}
-            {linkedinLink && (
-              <li>
-                <a
-                  target="_blank"
-                  class="flex gap-2 underline"
-                  href={linkedinLink}
-                >
-                  LinkedIn
-                  <div class="w-4 h-4">
-                    <Fragment set:html={LinkedIn} class="w-6 h-6" />
-                  </div>
-                </a>
-              </li>
-            )}
-          </ul>
-        </>
-      )
-    }
-  </div>
-  <div>
-    <!-- <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+  <section class="p-4 sm:p-12 flex flex-col">
+    <div class="mb-12">
       <h2
-        class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white"
+        class="text-left text-6xl tracking-tight font-extrabold text-gray-900"
       >
-        Contact Us
+        Let's start a <br /> project together
       </h2>
-      <p
-        class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl"
-      >
-        Got a technical issue? Want to send feedback about a beta feature? Need
-        details about our Business plan? Let us know.
-      </p>
-      <form class="space-y-8" method="post" onsubmit="handlesubmit">
+    </div>
+    <div class="flex flex-col gap-y-10 md:flex-row md:gap-x-32 items-start">
+      <div class="px-4 basis-full w-full">
+        <hr />
+        <form id="contactForm" class="flex flex-col justify-between">
+          <div class="flex flex-col p-6 pl-0 gap-1.5">
+            <label html-for="from_name" class="font-bold">
+              What's your name?
+            </label>
+            <input
+              type="text"
+              name="from_name"
+              id="from_name"
+              placeholder="John Doe *"
+              auto-Complete="given-name"
+              class="outline-none"
+              required
+            />
+          </div>
+
+          <hr />
+
+          <div class="flex flex-col p-6 pl-0 gap-1.5">
+            <label html-for="from_name" class="font-bold">
+              What's your email?
+            </label>
+            <input
+              type="text"
+              name="reply_to"
+              id="reply_to"
+              placeholder="john@doe.com *"
+              auto-Complete="given-email"
+              class="outline-none"
+              required
+            />
+          </div>
+
+          <hr />
+          <div class="flex flex-col p-6 pl-0 gap-1.5">
+            <label html-for="message" class="font-bold"> Your message</label>
+            <textarea
+              name="message"
+              id="message"
+              rows={6}
+              placeholder="Hello Abdel, can you help me with ... *"
+              class="outline-none resize-none"
+              required></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="h-20 w-20 rounded-full text-white bg-indigo-700 text-center font-semiboldtransition-colors duration-100 hover:bg-indigo-600"
+          >
+            send
+          </button>
+          <hr class="sm:hidden sm:my-30" />
+        </form>
+      </div>
+      <div class="flex flex-col gap-y-8">
         <div>
-          <label
-            for="email"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Your email</label
-          >
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-            placeholder="name@flowbite.com"
-            required
-          />
+          <p class="mb-2 uppercase leading-tight font-semibold">
+            CONTACT DETAILS
+          </p>
+          <a class="hover:underline" href=`mailto:${email}`>{email}</a>
         </div>
-        <div>
-          <label
-            for="subject"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Subject</label
+        <div id="socials">
+          <p class="mb-2 uppercase leading-tight font-semibold">SOCIALS</p>
+          <ul
+            class="flex flex-row justify-between sm:justify-start gap-2 sm:flex-col"
           >
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-            placeholder="Let us know how we can help you"
-            required
-          />
+            {
+              instagramLink && (
+                <li>
+                  <a
+                    class="flex flex-row gap-2"
+                    target="_blank"
+                    href={instagramLink}
+                  >
+                    <div class="[&_svg]:w-5 [&_svg]:h-5">
+                      <Fragment set:html={Instagram} />
+                    </div>
+                    <span class="hover:underline">Instagram</span>
+                  </a>
+                </li>
+              )
+            }
+            {
+              artstationLink && (
+                <li>
+                  <a
+                    class="flex flex-row gap-2"
+                    target="_blank"
+                    href={artstationLink}
+                  >
+                    <div class="[&_svg]:w-5 [&_svg]:h-5">
+                      <Fragment set:html={Artstation} />
+                    </div>
+                    <span class="hover:underline">Artstation</span>
+                  </a>
+                </li>
+              )
+            }
+            {
+              linkedinLink && (
+                <li>
+                  <a
+                    class="flex flex-row gap-2"
+                    target="_blank"
+                    href={linkedinLink}
+                  >
+                    <div class="[&_svg]:w-5 [&_svg]:h-5">
+                      <Fragment set:html={LinkedIn} />
+                    </div>
+                    <span class="hover:underline">LinkedIn</span>
+                  </a>
+                </li>
+              )
+            }
+          </ul>
         </div>
-        <div class="sm:col-span-2">
-          <label
-            for="message"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-            >Your message</label
-          >
-          <textarea
-            id="message"
-            rows="6"
-            name="message"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Leave a comment..."></textarea>
-        </div>
-        <button
-          type="submit"
-          class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-          >Send message</button
-        >
-      </form>
-    </div> -->
-    <script>
-      const handlesubmit = (e) => {
-        e.preventDefault();
-        console.log(e);
-      };
-    </script>
-  </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+></script>
+<script is:inline>
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        let response = await emailjs.sendForm(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          "#contactForm",
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        );
+        console.log("done!");
+      } catch (err) {
+        console.log("error!");
+      }
+    });
+</script>

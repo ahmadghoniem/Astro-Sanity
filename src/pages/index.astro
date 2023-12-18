@@ -12,7 +12,7 @@ const conceptArt = categories["ConceptArt"];
 ---
 
 <Layout title="DigiAbdel Art">
-  <section class="p-12 flex flex-col gap-6">
+  <section class="p-4 sm:p-12 flex flex-col gap-6">
     <div class="flex flex-col gap-6 [&_hr]:last:hidden">
       <h1 class="text-2xl font-bold underline">Illustrations</h1>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -21,7 +21,9 @@ const conceptArt = categories["ConceptArt"];
       <hr />
     </div>
     <div class="flex flex-col gap-6 [&_hr]:last:hidden">
-      <h1 class="text-2xl font-bold underline">Concept Art</h1>
+      <h1 class="text-2xl font-bold underline">
+        Concept Art & Character Design
+      </h1>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
         {conceptArt.map((post) => <Card post={post} />)}
       </div>

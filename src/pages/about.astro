@@ -13,7 +13,7 @@ const { name, bio } = await sanityClient.fetch(query);
 ---
 
 <Layout title={`About ${name}`}>
-  <section class="p-12 flex md:flex-row flex-col justify-between">
+  <section class="p-4 sm:p-12 flex md:flex-row flex-col justify-between">
     <div class="max-w-5xl prose-sm sm:prose-base prose-slate">
       <PortableText value={bio} />
     </div>

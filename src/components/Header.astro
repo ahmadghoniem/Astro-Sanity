@@ -105,4 +105,22 @@ const { artstationLink, instagramLink, logo } = await sanityClient.fetch(query);
       </a>
     </div>
   </div>
+  <script is:inline>
+    const handleMobileNavToggleClick = (e) => {
+      const isMobileNavOpen =
+        e.currentTarget.dataset.isMobileNavOpen === "true";
+      if (isMobileNavOpen) {
+        e.currentTarget.dataset.isMobileNavOpen = "false";
+      } else {
+        e.currentTarget.dataset.isMobileNavOpen = "true";
+      }
+      document.documentElement.classList.toggle("overflow-hidden");
+    };
+
+    document.addEventListener("astro:page-load", () => {
+      document
+        .getElementById("toggleMobileNav")
+        .addEventListener("click", handleMobileNavToggleClick);
+    });
+  </script>
 </header>
