@@ -163,9 +163,9 @@ const { email, linkedinLink, artstationLink, instagramLink } =
         EMAILJS.TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
         EMAILJS.PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
       } else {
-        EMAILJS.SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
-        EMAILJS.TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
-        EMAILJS.PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+        EMAILJS.SERVICE_ID = import.meta.env.EMAILJS_SERVICE_ID;
+        EMAILJS.TEMPLATE_ID = import.meta.env.EMAILJS_TEMPLATE_ID;
+        EMAILJS.PUBLIC_KEY = import.meta.env.EMAILJS_PUBLIC_KEY;
       }
 
       if (document.querySelector("#contactForm")) {
