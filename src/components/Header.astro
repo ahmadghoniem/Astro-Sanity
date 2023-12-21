@@ -12,7 +12,9 @@ const query = `*[_type == "author"][0] {
 const { artstationLink, instagramLink, logo } = await sanityClient.fetch(query);
 ---
 
-<header class="p-12 flex flex-row justify-between items-center flex-wrap">
+<header
+  class="p-4 sm:p-12 flex flex-row justify-between items-center flex-wrap"
+>
   <a href="/">
     <img
       width="480 "
