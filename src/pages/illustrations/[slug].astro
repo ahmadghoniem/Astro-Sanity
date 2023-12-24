@@ -7,23 +7,29 @@ import LucideIcon from "@/components/ui/LucideIcon.astro";
 import { ChevronLeft, ChevronRight } from "lucide";
 
 export async function getStaticPaths() {
-  const query = `*[_type == "illustrations"]|order(orderRank) {
+  const query = `
+  *[_type == "illustrations"]
+| order(orderRank) {
   ...,
   images[] {
-    asset->{
-      dominant,
+    asset-> {
+      url,
       metadata {
-      dimensions {
-        width,
-        height,
-        "twAspectRatio":"auto " + string(width) + " / " + string(height),
+        lqip,
+        palette {
+          dominant
+        },
+        dimensions {
+          width,
+          height,
+          "twAspectRatio": "auto " + string(width) + " / " + string(height),
+        }
       }
-      },
-      url
     },
     colSpan
   }
-  }`;
+}
+`;
   const posts = await sanityClient.fetch(query);
   return posts.map((props, id) => {
     const prevArticle = posts[id - 1];
@@ -36,6 +42,8 @@ export async function getStaticPaths() {
       alt: title,
       colSpan: img.colSpan,
       twAspectRatio: img.asset.metadata.dimensions.twAspectRatio,
+      lqip: img.asset.metadata.lqip,
+      dominantBackground: img.asset.metadata.palette.dominant.background,
     }));
     return {
       params: { slug: slug.current },
@@ -48,38 +56,37 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
 
 <Layout title={title}>
   <section class="p-4 sm:p-12">
-    <article>
-      <figure
-        class="grid grid-cols-6 grid-rows-[min-content_1fr] justify-items-center gap-2"
+    <article class="grid grid-cols-6 grid-rows-1 justify-items-center gap-2">
+      <div
+        class="text-center col-span-6 prose prose-slate prose-sm md:prose-lg mx-auto mb-16 md:mb-24 lg:mb-32"
       >
-        <figcaption
-          class="text-center prose prose-slate prose-lg col-span-6 max-w-5xl mx-auto mb-32"
-        >
-          <PortableText value={excerpt} />
-        </figcaption>
-
-        {
-          processedImgs.map(
-            ({ twAspectRatio, width, height, src, alt, colSpan }) => {
-              return (
-                <div
-                  style={`--col-span:${colSpan}`}
-                  class="[grid-column:var(--col-span)] "
-                >
-                  <img
-                    style={`--aspect-ratio:${twAspectRatio}`}
-                    width={width}
-                    height={height}
-                    src={src}
-                    alt={alt}
-                    class="object-cover [aspect-ratio:var(--aspect-ratio)]"
-                  />
-                </div>
-              );
-            },
-          )
-        }
-      </figure>
+        <PortableText value={excerpt} />
+      </div>
+      {
+        processedImgs.map((img) => (
+          <div style={`grid-column:${img.colSpan}`} class=" w-full h-full">
+            <figure class="relative">
+              <img
+                style={`--aspect-ratio:${img.twAspectRatio}`}
+                width={img.width}
+                height={img.height}
+                src={img.src}
+                alt={img.alt}
+                data-is-hidden="true"
+                class=" absolute inset-0 z-10 data-[is-hidden=true]:opacity-0 opacity-100 transition-opacity duration-100 ease-out"
+                onload="this.dataset.isHidden=false;this.nextElementSibling.dataset.isLoaded=true;"
+              />
+              <div
+                data-is-loaded="false"
+                class="bg-no-repeat [image-rendering:pixelated]  bg-[size:100%_100%] z-0 opacity-100 duration-100 ease-out transition-opacity data-[is-loaded=true]:opacity-0"
+                style={`
+        background-color:${img.dominantBackground};
+        background-image:url(${img.lqip});`}
+              />
+            </figure>
+          </div>
+        ))
+      }
     </article>
 
     <div class="flex flex-row w-full justify-between mt-8">

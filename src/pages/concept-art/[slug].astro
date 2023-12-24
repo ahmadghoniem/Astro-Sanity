@@ -50,11 +50,9 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
 <Layout title={title}>
   <section class="p-4 sm:p-12">
     <article>
-      <figure
-        class="grid grid-cols-6 grid-rows-[min-content_1fr] justify-items-center gap-2"
-      >
+      <figure class="grid grid-cols-6 grid-rows-1 justify-items-center gap-2">
         <figcaption
-          class="text-center prose prose-slate prose-lg col-span-6 max-w-5xl mx-auto mb-32"
+          class="text-center prose prose-slate prose-sm md:prose-lg col-span-6 max-w-5xl mx-auto mb-16 md:mb-24 lg:mb-32"
         >
           <PortableText value={excerpt} />
         </figcaption>
@@ -90,7 +88,7 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
             class="mr-auto flex flex-row-reverse gap-1 items-center"
             href={`/${prevArticle._type}/${prevArticle.slug.current}`}
           >
-            <h3 class="text-left"> {prevArticle.title} </h3>
+            <h3 class="text-left">{prevArticle.title}</h3>
             <LucideIcon class="w-8 h-8" icon={ChevronLeft} />
           </a>
         )
@@ -101,7 +99,7 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
             class="ml-auto flex flew-row gap-1 items-center"
             href={`/${nextArticle._type}/${nextArticle.slug.current}`}
           >
-            <h3 class="text-right">{nextArticle.title} </h3>
+            <h3 class="text-right">{nextArticle.title}</h3>
             <LucideIcon class="w-8 h-8" icon={ChevronRight} />
           </a>
         )

@@ -3,9 +3,48 @@ import Layout from "@/layouts/Layout.astro";
 import Card from "@/components/Card.astro";
 import { sanityClient } from "sanity:client";
 const query = `{
-	'illustrations': *[_type == 'illustrations']|order(orderRank),
-      	'ConceptArt': *[_type == 'concept-art']|order(orderRank),
-}`;
+  'illustrations': *[_type == 'illustrations']
+    | order(orderRank) {
+      _type,
+      title,
+      slug {
+        current
+      },
+      images[0] {
+        ...,
+        asset-> {
+          url,
+          metadata {
+            lqip,
+            palette {
+              dominant
+            }
+          }
+        }
+      }
+    },
+  'ConceptArt': *[_type == 'concept-art']
+    | order(orderRank) {
+      _type,
+      title,
+      slug {
+        current
+      },
+      images[0] {
+        ...,
+        asset-> {
+          url,
+          metadata {
+            lqip,
+            palette {
+              dominant
+            }
+          }
+        }
+      }
+    }
+}
+`;
 const categories = await sanityClient.fetch(query);
 const illustrations = categories["illustrations"];
 const conceptArt = categories["ConceptArt"];

@@ -1,7 +1,5 @@
 ---
-// import { formatDate } from "@/utils";
 import { imageUrlFor } from "@/lib/utils";
-
 const { post } = Astro.props;
 ---
 
@@ -11,19 +9,32 @@ const { post } = Astro.props;
   transition:name={post.slug.current}
 >
   <article>
-    <figure class="group-hover:opacity-70 transition-opacity duration-100">
-      <img
-        class="rounded-sm"
-        src={imageUrlFor(post.images[0]).width(640).height(640).url()}
-        alt={post.title}
-        height="640"
-        width="640"
-      />
-    </figure>
-    <figcaption class="mt-2">
-      <h2 class="text-center font-semibold">
+    <figure>
+      <div
+        class="relative group-hover:opacity-70 transition-opacity duration-100 rounded-sm"
+      >
+        <img
+          class="absolute inset-0 z-10 data-[is-hidden=true]:opacity-0 opacity-100 transition-opacity duration-100 ease-out"
+          data-is-hidden="true"
+          src={imageUrlFor(post.images).width(640).height(640).url()}
+          alt={post.title}
+          height="640"
+          width="640"
+          loading="lazy"
+          onload="this.nextElementSibling.dataset.isLoaded=true;this.dataset.isHidden=false;"
+        />
+        <div
+          data-is-loaded="false"
+          class="bg-no-repeat [image-rendering:pixelated] pb-[100%] bg-[size:100%_100%] z-0 opacity-100 duration-100 ease-out transition-opacity data-[is-loaded=true]:opacity-0"
+          style={`
+        background-color:${post.images.asset.metadata.palette.dominant.background};
+        background-image:url(${post.images.asset.metadata.lqip});`}
+        >
+        </div>
+      </div>
+      <figcaption class="mt-2 text-center font-semibold">
         {post.title}
-      </h2>
-    </figcaption>
+      </figcaption>
+    </figure>
   </article>
 </a>
