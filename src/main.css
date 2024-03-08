@@ -67,4 +67,8 @@
     font-display: block; /* This property will help us not flash unstyled text for a couple hundred milliseconds, and then it would act like font-display: swap */
     src: url("/fonts/OpenSans/open-sans-700.woff2") format("woff2");
   }
+
+  [data-col-span="4"] {
+    @apply !col-start-2;
+  }
 }

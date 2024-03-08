@@ -65,6 +65,7 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
               return (
                 <div
                   style={`--col-span:${colSpan}`}
+                  data-col-span={colSpan[5]}
                   class="col-span-3 sm:[grid-column:var(--col-span)]"
                 >
                   <img
