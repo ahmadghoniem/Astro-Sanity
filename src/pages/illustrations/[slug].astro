@@ -65,6 +65,7 @@ const { title, excerpt, processedImgs, prevArticle, nextArticle } = Astro.props;
                 <div
                   style={`--col-span:${colSpan}`}
                   class="col-span-3 sm:[grid-column:var(--col-span)]"
+                  data-col-span={colSpan[5]}
                 >
                   <img
                     style={`--aspect-ratio:${twAspectRatio}`}
